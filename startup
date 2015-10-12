@@ -6,6 +6,6 @@
 #curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key >> /home/centos/.ssh/authorized_keys
 #chmod 700 /home/centos/.ssh
 #chmod 600 /home/centos/.ssh/authorized_keys
-passwd -d centos
+echo "centos" | passwd centos --stdin
 /usr/bin/ssh-keygen -A
 /usr/sbin/sshd -D
