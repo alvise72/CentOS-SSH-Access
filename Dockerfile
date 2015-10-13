@@ -37,7 +37,7 @@ RUN echo "centos ALL=(ALL)       ALL" >> /etc/sudoers
 RUN mv /etc/ntp.conf /etc/ntp.conf.old
 ADD ./ntp.conf /etc/ntp.conf
 #RUN chmod +s /usr/bin/ping /usr/bin/nslookup
-ADD ./resolv.conf /etc/resolv.conf
+#ADD ./resolv.conf /etc/resolv.conf
 ADD ./startup /etc/startup
 RUN chmod +x /etc/startup
-CMD /bin/bash
+CMD /etc/startup

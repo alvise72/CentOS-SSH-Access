@@ -8,4 +8,8 @@
 #chmod 600 /home/centos/.ssh/authorized_keys
 echo "centos" | passwd centos --stdin
 /usr/bin/ssh-keygen -A
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+chmod +s /usr/bin/ping /usr/bin/nslookup
+echo "Downloading public key from metadata server..."
+curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key > /root/pubkey
 /usr/sbin/sshd -D
