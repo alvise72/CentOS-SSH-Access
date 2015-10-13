@@ -1,15 +1,16 @@
-#ifup eth0
-#mkdir -p /home/centos/.ssh
-#chown centos:centos /home/centos/.ssh
-#touch /home/centos/.ssh/authorized_keys
-#chown centos:centos /home/centos/.ssh/authorized_keys
+mkdir -p /home/centos/.ssh
+chown centos:centos /home/centos/.ssh
+touch /home/centos/.ssh/authorized_keys
+chown centos:centos /home/centos/.ssh/authorized_keys
 #curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key >> /home/centos/.ssh/authorized_keys
-#chmod 700 /home/centos/.ssh
-#chmod 600 /home/centos/.ssh/authorized_keys
+chmod 700 /home/centos/.ssh
+chmod 600 /home/centos/.ssh/authorized_keys
 echo "centos" | passwd centos --stdin
 /usr/bin/ssh-keygen -A
 echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 chmod +s /usr/bin/ping /usr/bin/nslookup
+#while( `hostname -I` != [0-9]*.[0-9]*.[0-9]*.[0-9]* )
+sleep 10 # network is not ready immediately, must wait a little before downloading from metadata server
 echo "Downloading public key from metadata server..."
-curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key > /root/pubkey
+curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key >> /home/centos/.ssh/authorized_keys
 /usr/sbin/sshd -D
