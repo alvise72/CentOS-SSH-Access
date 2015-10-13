@@ -36,11 +36,8 @@ RUN useradd -u 500 -g 500 -m -p centos centos
 RUN echo "centos ALL=(ALL)       ALL" >> /etc/sudoers
 RUN mv /etc/ntp.conf /etc/ntp.conf.old
 ADD ./ntp.conf /etc/ntp.conf
-RUN chmod +s /usr/bin/ping /usr/bin/nslookup
+#RUN chmod +s /usr/bin/ping /usr/bin/nslookup
 ADD ./resolv.conf /etc/resolv.conf
-RUN mkdir -p /home/centos/.ssh/
-#RUN touch /home/centos/.ssh/authorized_keys
-#RUN passwd -d centos
 ADD ./startup /etc/startup
 RUN chmod +x /etc/startup
 CMD /bin/bash
