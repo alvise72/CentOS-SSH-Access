@@ -13,7 +13,7 @@ chmod +s /usr/bin/ping /usr/bin/nslookup
 #sleep 10 # network is not ready immediately, must wait a little before downloading from metadata server
 while [ 1 ]; do
 
-  if [ $(ping -c 1 169.254.169.254 | grep "1 packets transmitted" | wc -l) -ne 0 ]; then
+  if [ $(ping -c 1 8.8.8.8 | grep "1 packets transmitted" | wc -l) -ne 0 ]; then
      break
   fi
   echo "Waiting for network..."
