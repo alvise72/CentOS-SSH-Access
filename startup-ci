@@ -1,0 +1,19 @@
+/usr/bin/ssh-keygen -A
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+chmod +s /usr/bin/ping /usr/bin/nslookup
+while [ 1 ]; do
+
+  if [ $(ping -c 1 8.8.8.8 | grep "1 packets transmitted" | wc -l) -ne 0 ]; then
+     break
+  fi
+  echo "Waiting for network..."
+  sleep 1
+
+done
+hostname `curl http://169.254.169.254/latest/meta-data/public-hostname`
+myip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+echo "CentOS 7 running on $hostname ($myip)"
+cd /var/lib/cloud/
+rm -rf *
+/usr/bin/cloud-init -d init
+/usr/sbin/sshd -D
