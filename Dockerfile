@@ -26,9 +26,9 @@ RUN yum -y install iproute \
 	passwd \
 	initscripts \
 	bash
-RUN groupadd -g 500 centos
-RUN useradd -u 500 -g 500 -m -p centos centos
-RUN echo "centos ALL=(ALL)       ALL" >> /etc/sudoers
+#RUN groupadd -g 500 centos
+#RUN useradd -u 500 -g 500 -m -p centos centos
+#RUN echo "centos ALL=(ALL)       ALL" >> /etc/sudoers
 RUN mv /etc/ntp.conf /etc/ntp.conf.old
 ADD ./ntp.conf /etc/ntp.conf
 #RUN chmod +s /usr/bin/ping /usr/bin/nslookup
