@@ -10,10 +10,11 @@ while [ 1 ]; do
   sleep 1
 
 done
-hostname `curl http://169.254.169.254/latest/meta-data/public-hostname`
+Hostname=`curl http://169.254.169.254/latest/meta-data/public-hostname`
 myip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
-echo "CentOS 7 running on $hostname ($myip)"
+echo "CentOS 7 running on $Hostname ($myip)"
 cd /var/lib/cloud/
 rm -rf *
 /usr/bin/cloud-init -d init
+passwd -d centos
 /usr/sbin/sshd -D
