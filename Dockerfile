@@ -1,14 +1,14 @@
-FROM centos:latest
+FROM centos:centos7
 EXPOSE 22
 MAINTAINER Alvise Dorigo <alvise.dorigo@pd.infn.it>
 RUN yum -y update 
 RUN yum -y install iproute \
+	cloud-init \
 	net-tools \
 	telnet \
 	bind-utils \
 	hostname \
 	less \
-	vim \
 	more \
 	gawk \
 	sed \
@@ -16,11 +16,6 @@ RUN yum -y install iproute \
 	sudo \
 	bash \
 	tcsh \
-	git \
-	make \
-	gcc-c++ \
-	perl \
-	cmake \
 	coreutils \
 	ntp \
 	iputils \
@@ -38,6 +33,6 @@ RUN mv /etc/ntp.conf /etc/ntp.conf.old
 ADD ./ntp.conf /etc/ntp.conf
 #RUN chmod +s /usr/bin/ping /usr/bin/nslookup
 #ADD ./resolv.conf /etc/resolv.conf
-ADD ./startup /etc/startup
-RUN chmod +x /etc/startup
-CMD /etc/startup
+ADD ./startup-ci /etc/startup-ci
+RUN chmod +x /etc/startup-ci
+CMD /etc/startup-ci

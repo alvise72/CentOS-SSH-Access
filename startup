@@ -24,5 +24,5 @@ echo "Downloading public key from metadata server..."
 curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key >> /home/centos/.ssh/authorized_keys
 hostname `curl http://169.254.169.254/latest/meta-data/public-hostname`
 myip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
-echo "CentOS 7.1.1503 running on $myip"
+echo "CentOS 7 running on $myip"
 /usr/sbin/sshd -D
